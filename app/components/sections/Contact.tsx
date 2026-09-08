@@ -1,6 +1,11 @@
-import { type FormEvent, useState } from "react";
+import {
+  type ChangeEvent,
+  type FormEvent,
+  useState,
+} from "react";
 
 import { HugeiconsIcon } from "@hugeicons/react";
+
 import {
   ArrowUpRight01Icon,
   GithubIcon,
@@ -15,44 +20,62 @@ import { Container } from "~/components/ui/Container";
 import { contact } from "~/data/contact";
 
 type FormData = {
-  name: string;
-  company: string;
-  contactMethod: string;
+  email: string;
+  phone: string;
   message: string;
 };
 
 const initialFormData: FormData = {
-  name: "",
-  company: "",
-  contactMethod: "",
+  email: "",
+  phone: "",
   message: "",
 };
 
 function buildWhatsappUrl(message: string) {
-  return `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`;
+  const phone = contact.whatsapp.replace(/\D/g, "");
+
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
 export function Contact() {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] =
+    useState<FormData>(initialFormData);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleChange(
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
+  ) {
+    const { name, value } = event.target;
+
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(
+    event: FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
     const message = [
-      "Hola Cierra, vi su sitio y quisiera hablar sobre un proyecto para mi negocio.",
+      contact.whatsappMessage,
       "",
-      `Nombre: ${formData.name}`,
-      formData.company
-        ? `Empresa: ${formData.company}`
-        : "Empresa: No especificada",
-      `Correo o WhatsApp: ${formData.contactMethod}`,
+      "Datos de contacto:",
+      `Correo: ${formData.email}`,
+      formData.phone
+        ? `Teléfono: ${formData.phone}`
+        : "Teléfono: No especificado",
       "",
-      "Lo que necesito resolver:",
+      "Proyecto:",
       formData.message,
     ].join("\n");
 
+    const whatsappUrl = buildWhatsappUrl(message);
+
     window.open(
-      buildWhatsappUrl(message),
+      whatsappUrl,
       "_blank",
       "noopener,noreferrer",
     );
@@ -61,320 +84,245 @@ export function Contact() {
   return (
     <section
       id="contacto"
-      className="relative flex min-h-screen flex-col overflow-hidden bg-zinc-950 text-white"
+      className="relative flex min-h-screen items-center overflow-hidden bg-zinc-950 text-white"
     >
-      {/* Glow decorativo */}
+      {/* Glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.025] blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/[0.02] blur-3xl"
       />
 
-      {/* Contenido principal */}
-      <div className="relative flex flex-1 items-center py-16 sm:py-20 lg:py-10">
-        <Container className="w-full">
-          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-24">
-            {/* LADO IZQUIERDO */}
+      <Container className="relative z-10 w-full">
+        <div className="grid min-h-[78vh] gap-14 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20 lg:py-16 xl:grid-cols-[1fr_1fr] xl:gap-28">
+
+          {/* =====================================================
+              IZQUIERDA
+          ====================================================== */}
+
+          <div className="flex flex-col justify-between">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.55 }}
+              initial={{
+                opacity: 0,
+                y: 24,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.25,
+              }}
+              transition={{
+                duration: 0.55,
+              }}
             >
-              <div className="mb-8 flex items-center gap-3">
-                <span className="size-2 rounded-full bg-white" />
+              <h2 className="max-w-[720px] text-[clamp(3.2rem,5.6vw,6.5rem)] font-semibold leading-[0.91] tracking-[-0.06em] text-white">
+                Creamos software
 
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500 sm:text-sm">
-                  Cierra · Agencia de software
-                </p>
-              </div>
-
-              <h2 className="max-w-3xl text-[clamp(2.8rem,5.5vw,5.8rem)] font-semibold leading-[0.93] tracking-[-0.055em] text-white">
-                Software que
                 <span className="block text-zinc-500">
-                  cierra la brecha.
+                  que hace avanzar
+                </span>
+
+                <span className="block">
+                  tu negocio.
                 </span>
               </h2>
 
-              <p className="mt-7 max-w-xl text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
-                Diseñamos y desarrollamos sistemas, plataformas y productos
-                digitales que convierten procesos complejos en soluciones
+              <p className="mt-8 max-w-lg text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
+                Diseñamos y desarrollamos sistemas,
+                plataformas y productos digitales que
+                convierten procesos complejos en soluciones
                 simples, rápidas y escalables.
               </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href={buildWhatsappUrl(contact.whatsappMessage)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-zinc-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-zinc-200"
-                >
-                  <HugeiconsIcon
-                    icon={WhatsappIcon}
-                    size={20}
-                    strokeWidth={1.8}
-                  />
-
-                  Hablemos de tu proyecto
-
-                  <HugeiconsIcon
-                    icon={ArrowUpRight01Icon}
-                    size={17}
-                    strokeWidth={1.8}
-                    className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </a>
-              </div>
-
-              {/* Redes */}
-              <div className="mt-10 border-t border-zinc-800/80 pt-7">
-                <p className="mb-4 text-sm text-zinc-500">
-                  Encuentra a Cierra en
-                </p>
-
-                <div className="flex flex-wrap gap-2.5">
-                  <a
-                    href={`mailto:${contact.email}`}
-                    aria-label="Correo electrónico"
-                    className="group flex size-11 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 transition-all duration-300 hover:border-zinc-600 hover:bg-zinc-900 hover:text-white"
-                  >
-                    <HugeiconsIcon
-                      icon={Mail01Icon}
-                      size={19}
-                      strokeWidth={1.7}
-                    />
-                  </a>
-
-                  <a
-                    href={contact.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                    className="group flex size-11 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 transition-all duration-300 hover:border-zinc-600 hover:bg-zinc-900 hover:text-white"
-                  >
-                    <HugeiconsIcon
-                      icon={Linkedin01Icon}
-                      size={19}
-                      strokeWidth={1.7}
-                    />
-                  </a>
-
-                  <a
-                    href={contact.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub"
-                    className="group flex size-11 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 transition-all duration-300 hover:border-zinc-600 hover:bg-zinc-900 hover:text-white"
-                  >
-                    <HugeiconsIcon
-                      icon={GithubIcon}
-                      size={19}
-                      strokeWidth={1.7}
-                    />
-                  </a>
-                </div>
-              </div>
             </motion.div>
 
-            {/* FORMULARIO */}
+            {/* CONTACTO REAL */}
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.55,
-                delay: 0.08,
+              initial={{
+                opacity: 0,
+                y: 16,
               }}
-              className="rounded-[2rem] border border-zinc-800/80 bg-zinc-900/60 p-5 backdrop-blur-sm sm:p-7 lg:p-8"
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.15,
+              }}
+              className="mt-14 flex flex-wrap gap-x-6 gap-y-4 lg:mt-0"
             >
-              <div className="mb-7 flex items-start justify-between gap-4">
-                <div>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                    Inicia un proyecto
-                  </p>
+              {/* EMAIL */}
 
-                  <h3 className="text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">
-                    Cuéntanos qué necesitas.
-                  </h3>
-                </div>
-
-                <div className="hidden size-11 shrink-0 items-center justify-center rounded-full border border-zinc-800 sm:flex">
-                  <HugeiconsIcon
-                    icon={ArrowUpRight01Icon}
-                    size={19}
-                    strokeWidth={1.7}
-                    className="text-zinc-500"
-                  />
-                </div>
-              </div>
-
-              <p className="max-w-xl text-sm leading-6 text-zinc-400 sm:text-base">
-                Déjanos los detalles y abriremos WhatsApp con toda la
-                información lista para enviarnos.
-              </p>
-
-              <form
-                onSubmit={handleSubmit}
-                className="mt-7 grid gap-4 sm:grid-cols-2"
+              <a
+                href={`mailto:${contact.email}`}
+                className="group flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-white"
               >
-                {/* Nombre */}
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block text-xs font-medium uppercase tracking-[0.08em] text-zinc-500"
-                  >
-                    Nombre
-                  </label>
+                <HugeiconsIcon
+                  icon={Mail01Icon}
+                  size={18}
+                  strokeWidth={1.7}
+                />
 
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    autoComplete="name"
-                    value={formData.name}
-                    onChange={(event) =>
-                      setFormData({
-                        ...formData,
-                        name: event.target.value,
-                      })
-                    }
-                    placeholder="Tu nombre"
-                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-zinc-600 hover:border-zinc-700 focus:border-zinc-500 focus:bg-zinc-950"
-                  />
-                </div>
+                <span>{contact.email}</span>
+              </a>
 
-                {/* Empresa */}
-                <div>
-                  <label
-                    htmlFor="company"
-                    className="mb-2 block text-xs font-medium uppercase tracking-[0.08em] text-zinc-500"
-                  >
-                    Empresa
-                    <span className="ml-1 normal-case tracking-normal text-zinc-600">
-                      (opcional)
-                    </span>
-                  </label>
+              {/* WHATSAPP */}
 
-                  <input
-                    id="company"
-                    type="text"
-                    autoComplete="organization"
-                    value={formData.company}
-                    onChange={(event) =>
-                      setFormData({
-                        ...formData,
-                        company: event.target.value,
-                      })
-                    }
-                    placeholder="Nombre de tu negocio"
-                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-zinc-600 hover:border-zinc-700 focus:border-zinc-500 focus:bg-zinc-950"
-                  />
-                </div>
+              <a
+                href={buildWhatsappUrl(
+                  contact.whatsappMessage,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contactar por WhatsApp"
+                className="flex items-center text-zinc-500 transition-colors hover:text-white"
+              >
+                <HugeiconsIcon
+                  icon={WhatsappIcon}
+                  size={19}
+                  strokeWidth={1.7}
+                />
+              </a>
 
-                {/* Contacto */}
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="contactMethod"
-                    className="mb-2 block text-xs font-medium uppercase tracking-[0.08em] text-zinc-500"
-                  >
-                    Correo o WhatsApp
-                  </label>
+              {/* LINKEDIN */}
 
-                  <input
-                    id="contactMethod"
-                    type="text"
-                    required
-                    value={formData.contactMethod}
-                    onChange={(event) =>
-                      setFormData({
-                        ...formData,
-                        contactMethod: event.target.value,
-                      })
-                    }
-                    placeholder="correo@empresa.com o +52..."
-                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-zinc-600 hover:border-zinc-700 focus:border-zinc-500 focus:bg-zinc-950"
-                  />
-                </div>
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn de Cierra"
+                className="flex items-center text-zinc-500 transition-colors hover:text-white"
+              >
+                <HugeiconsIcon
+                  icon={Linkedin01Icon}
+                  size={19}
+                  strokeWidth={1.7}
+                />
+              </a>
 
-                {/* Mensaje */}
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block text-xs font-medium uppercase tracking-[0.08em] text-zinc-500"
-                  >
-                    Proyecto
-                  </label>
+              {/* GITHUB */}
 
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={(event) =>
-                      setFormData({
-                        ...formData,
-                        message: event.target.value,
-                      })
-                    }
-                    placeholder="Cuéntanos sobre el sistema, plataforma, automatización o producto que quieres desarrollar."
-                    className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-zinc-600 hover:border-zinc-700 focus:border-zinc-500 focus:bg-zinc-950"
-                  />
-                </div>
-
-                <div className="sm:col-span-2">
-                  <button
-                    type="submit"
-                    className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-zinc-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-zinc-200 sm:w-auto"
-                  >
-                    <HugeiconsIcon
-                      icon={WhatsappIcon}
-                      size={19}
-                      strokeWidth={1.8}
-                    />
-
-                    Enviar proyecto
-
-                    <HugeiconsIcon
-                      icon={ArrowUpRight01Icon}
-                      size={17}
-                      strokeWidth={1.8}
-                      className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </button>
-                </div>
-              </form>
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub de Cierra"
+                className="flex items-center text-zinc-500 transition-colors hover:text-white"
+              >
+                <HugeiconsIcon
+                  icon={GithubIcon}
+                  size={19}
+                  strokeWidth={1.7}
+                />
+              </a>
             </motion.div>
           </div>
-        </Container>
-      </div>
 
-      {/* FOOTER INFERIOR */}
-      <footer className="relative border-t border-zinc-900">
-        <Container>
-          <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-xl font-semibold tracking-[-0.04em]">
-                CIERRA
-              </span>
+          {/* =====================================================
+              DERECHA
+          ====================================================== */}
 
-              <span className="hidden h-4 w-px bg-zinc-800 sm:block" />
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 24,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.55,
+              delay: 0.08,
+            }}
+            className="flex flex-col"
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="mt-auto pt-16 lg:pt-20"
+            >
+              {/* EMAIL */}
 
-              <span className="text-xs text-zinc-600">
-                Software diseñado para avanzar.
-              </span>
-            </div>
+              <div className="group relative border-b border-zinc-700">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="nombre@empresa.com"
+                  className="peer w-full bg-transparent px-1 py-4 text-base text-white outline-none placeholder:text-zinc-500 sm:text-lg"
+                />
 
-            <div className="flex items-center gap-5 text-xs text-zinc-600">
-              <span>
-                © {new Date().getFullYear()} Cierra
-              </span>
+                <span className="absolute bottom-[-1px] left-0 h-px w-0 bg-white transition-all duration-300 peer-focus:w-full" />
+              </div>
 
-              <span>
-                México
-              </span>
-            </div>
-          </div>
-        </Container>
-      </footer>
+              {/* TELÉFONO */}
+
+              <div className="group relative border-b border-zinc-700">
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+52 000 000 0000"
+                  className="peer w-full bg-transparent px-1 py-4 text-base text-white outline-none placeholder:text-zinc-500 sm:text-lg"
+                />
+
+                <span className="absolute bottom-[-1px] left-0 h-px w-0 bg-white transition-all duration-300 peer-focus:w-full" />
+              </div>
+
+              {/* MENSAJE */}
+
+              <div className="group relative border-b border-zinc-700">
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={2}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Cuéntanos qué necesitas desarrollar..."
+                  className="peer min-h-[96px] w-full resize-none bg-transparent px-1 py-4 text-base text-white outline-none placeholder:text-zinc-500 sm:text-lg"
+                />
+
+                <span className="absolute bottom-[-1px] left-0 h-px w-0 bg-white transition-all duration-300 peer-focus:w-full" />
+              </div>
+
+              {/* SUBMIT */}
+
+              <div className="mt-8 flex justify-end">
+                <button
+                  type="submit"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-zinc-950 transition-all duration-300 hover:bg-zinc-200"
+                >
+                  Cuéntame tu proyecto
+
+                  <HugeiconsIcon
+                    icon={ArrowUpRight01Icon}
+                    size={18}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </div>
+      </Container>
     </section>
   );
 }

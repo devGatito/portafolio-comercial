@@ -446,7 +446,7 @@ export function About() {
   return (
     <section
       id="nosotros"
-      className="border-b border-zinc-200 bg-white py-16 sm:py-20 lg:py-24"
+      className="border-b border-zinc-200 bg-white py-4"
     >
       <Container>
         {/* About */}
@@ -522,9 +522,7 @@ export function About() {
         >
           <div className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                Stack & herramientas
-              </p>
+             
 
               <h3 className="mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-zinc-950 sm:text-3xl">
                 {technologies.length} tecnologías para construir la solución

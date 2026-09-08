@@ -3,17 +3,14 @@ import {
   Alert02Icon,
   Target02Icon,
   Flag02Icon,
-
   CodeIcon,
   Clock01Icon,
   Money03Icon,
   PackageIcon,
-
   Layers01Icon,
   ViewIcon,
   CheckmarkCircle02Icon,
   Settings02Icon,
-
   TestTube01Icon,
   SentIcon,
   Wrench01Icon,
@@ -41,7 +38,10 @@ export const processSteps = [
       "Conversamos sobre la operación, la necesidad y el resultado esperado.",
     duration: "Primera reunión",
     deliverable: "Diagnóstico inicial",
-    image: "https://picsum.photos/seed/cierra-discovery/1400/1000",
+
+    // Software engineer analizando el flujo / sistema en whiteboard
+    image:
+      "https://images.unsplash.com/photo-1580894740397-0946742deb4b?auto=format&fit=crop&w=1400&h=1000&q=85",
 
     points: [
       {
@@ -70,7 +70,10 @@ export const processSteps = [
       "Se establecen funcionalidades, tiempos, entregables, precio y condiciones.",
     duration: "Antes de comenzar",
     deliverable: "Propuesta de proyecto",
-    image: "https://picsum.photos/seed/cierra-planning/1400/1000",
+
+    // Wireframes reales: convertir la idea en una solución definida
+    image:
+      "https://images.unsplash.com/photo-1600132806608-231446b2e7af?auto=format&fit=crop&w=1400&h=1000&q=85",
 
     points: [
       {
@@ -99,7 +102,10 @@ export const processSteps = [
       "El cliente puede revisar el progreso y validar las partes importantes.",
     duration: "Durante el desarrollo",
     deliverable: "Avances revisables",
-    image: "https://picsum.photos/seed/cierra-development/1400/1000",
+
+    // Código real en dark mode, mucho más propio de desarrollo
+    image:
+      "https://images.unsplash.com/photo-1770734360042-676ef707d022?auto=format&fit=crop&w=1400&h=1000&q=85",
 
     points: [
       {
@@ -128,7 +134,10 @@ export const processSteps = [
       "Probamos la solución, realizamos la entrega y atendemos los ajustes acordados.",
     duration: "Etapa final",
     deliverable: "Solución terminada",
-    image: "https://picsum.photos/seed/cierra-delivery/1400/1000",
+
+    // Dashboard / monitoreo posterior al lanzamiento
+    image:
+      "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1400&h=1000&q=85",
 
     points: [
       {

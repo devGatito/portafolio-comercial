@@ -1,5 +1,4 @@
 import { Navbar } from "~/components/layout/Navbar";
-import { Footer } from "~/components/layout/Footer";
 
 import { Hero } from "~/components/sections/Hero";
 import { Problems } from "~/components/sections/Problems";
@@ -8,7 +7,6 @@ import { BusinessCases } from "~/components/sections/BusinessCases";
 import { Process } from "~/components/sections/Process";
 import { About } from "~/components/sections/About";
 import { Contact } from "~/components/sections/Contact";
-import FeatureCards from "~/components/sections/Test";
 
 export default function Home() {
   return (

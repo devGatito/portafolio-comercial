@@ -58,7 +58,7 @@ export function Problems() {
   return (
     <section
       id="problemas"
-      className="overflow-hidden  bg-white "
+      className="overflow-hidden  bg-white scroll-reveal-left"
     >
       <Container>
         {/* Heading */}

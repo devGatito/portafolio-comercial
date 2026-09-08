@@ -19,7 +19,7 @@ export function Services() {
   return (
     <section
       id="servicios"
-      className="overflow-hidden border-b border-zinc-200 bg-white"
+      className="overflow-hidden border-b border-zinc-200 bg-white scroll-reveal-scale"
     >
       {/* =========================================================
           HERO
@@ -126,9 +126,7 @@ export function Services() {
 
                       {/* problem */}
                       <div className="mt-7 max-w-lg">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
-                          Problema que resuelve
-                        </p>
+                       
 
                         <p className="mt-3 text-base leading-7 text-zinc-600 sm:text-[17px] sm:leading-7">
                           {service.problem}
@@ -307,11 +305,11 @@ export function Services() {
             className="
               grid
               gap-12
-              py-16
-              sm:py-20
+              py-4
+              
               lg:grid-cols-[1fr_auto]
               lg:items-end
-              lg:py-24
+              
             "
           >
             <div>

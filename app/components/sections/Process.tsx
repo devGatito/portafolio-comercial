@@ -27,7 +27,7 @@ export function Process() {
   return (
     <section
       id="proceso"
-      className="relative bg-white py-24 sm:py-28"
+      className="relative bg-white py-24 sm:py-28 scroll-reveal"
     >
       <Container>
         {/* Mensaje superior */}
@@ -316,25 +316,13 @@ export function Process() {
 
                 <div className="relative z-10 flex min-h-[460px] flex-col p-6 sm:p-7">
                   <div className="flex items-start justify-between">
-                    <div className="flex size-12 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-white backdrop-blur-md">
-                      <HugeiconsIcon
-                        icon={icon}
-                        size={24}
-                        strokeWidth={1.7}
-                      />
-                    </div>
+                   
 
-                    <span className="text-sm font-medium tabular-nums text-white/60">
-                      {step.number}
-                    </span>
+                    
                   </div>
 
                   <div className="mt-auto">
-                    {step.duration && (
-                      <span className="inline-flex rounded-full border border-white/15 bg-black/20 px-3 py-1 text-xs font-medium text-white/75 backdrop-blur-md">
-                        {step.duration}
-                      </span>
-                    )}
+                    
 
                     <h3 className="mt-5 text-2xl font-semibold tracking-[-0.025em] text-white">
                       {step.title}
@@ -351,7 +339,7 @@ export function Process() {
         key={point.label}
         className="flex items-center gap-3"
       >
-        <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/10 text-white/80 backdrop-blur-sm">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-xl0 text-white/80 ">
           <HugeiconsIcon
             icon={point.icon}
             size={17}
@@ -367,17 +355,7 @@ export function Process() {
   </div>
 ) : null}
 
-                    {step.deliverable && (
-                      <div className="mt-6 border-t border-white/15 pt-5">
-                        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/50">
-                          Entregable
-                        </p>
-
-                        <p className="mt-1 text-sm font-medium text-white">
-                          {step.deliverable}
-                        </p>
-                      </div>
-                    )}
+                    
                   </div>
                 </div>
               </motion.article>
