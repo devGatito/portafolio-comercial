@@ -62,13 +62,7 @@ export function Contact() {
     const message = [
       contact.whatsappMessage,
       "",
-      "Datos de contacto:",
-      `Correo: ${formData.email}`,
-      formData.phone
-        ? `Teléfono: ${formData.phone}`
-        : "Teléfono: No especificado",
-      "",
-      "Proyecto:",
+      
       formData.message,
     ].join("\n");
 
@@ -191,35 +185,7 @@ export function Contact() {
 
               {/* LINKEDIN */}
 
-              <a
-                href={contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn de Cierra"
-                className="flex items-center text-zinc-500 transition-colors hover:text-white"
-              >
-                <HugeiconsIcon
-                  icon={Linkedin01Icon}
-                  size={19}
-                  strokeWidth={1.7}
-                />
-              </a>
-
-              {/* GITHUB */}
-
-              <a
-                href={contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub de Cierra"
-                className="flex items-center text-zinc-500 transition-colors hover:text-white"
-              >
-                <HugeiconsIcon
-                  icon={GithubIcon}
-                  size={19}
-                  strokeWidth={1.7}
-                />
-              </a>
+            
             </motion.div>
           </div>
 

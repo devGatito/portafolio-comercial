@@ -446,7 +446,7 @@ export function About() {
   return (
     <section
       id="nosotros"
-      className="border-b border-zinc-200 bg-white py-4"
+      className=" bg-white py-4"
     >
       <Container>
         {/* About */}
@@ -455,7 +455,7 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}
-          className="grid gap-8 border-b border-zinc-200 pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16 "
+          className="grid gap-8  pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16 "
         >
           <div>
             
@@ -486,18 +486,18 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, delay: 0.05 }}
-          className="grid border-b border-zinc-200 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid  sm:grid-cols-2 lg:grid-cols-4"
         >
           {capabilities.map((item, index) => (
             <div
               key={item.title}
               className={[
-                "border-zinc-200 py-6",
-                "border-b sm:px-6",
-                index % 2 === 0 ? "sm:border-r" : "",
-                index < 2 ? "lg:border-b-0" : "",
-                "lg:border-b-0 lg:border-r",
-                index === capabilities.length - 1 ? "lg:border-r-0" : "",
+                " py-6",
+                " sm:px-6",
+                index % 2 === 0 ? "" : "",
+                index < 2 ? "" : "",
+                "",
+                index === capabilities.length - 1 ? "" : "",
                 index === 0 ? "sm:pl-0" : "",
               ].join(" ")}
             >

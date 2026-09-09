@@ -133,49 +133,7 @@ export function Services() {
                         </p>
                       </div>
 
-                      {/* CTA */}
-                      <div className="mt-9">
-                        <a
-                          href={getWhatsappUrl(service.whatsappMessage)}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Consultar solución: ${service.name} por WhatsApp`}
-                          className="
-                            group/link
-                            inline-flex
-                            items-center
-                            gap-3
-                            text-sm
-                            font-semibold
-                            text-zinc-950
-                          "
-                        >
-                          Consultar solución
-
-                          <span
-                            className="
-                              flex
-                              size-9
-                              items-center
-                              justify-center
-                              rounded-full
-                              border
-                              border-zinc-300
-                              transition-all
-                              duration-300
-                              group-hover/link:border-zinc-950
-                              group-hover/link:bg-zinc-950
-                              group-hover/link:text-white
-                            "
-                          >
-                            <HugeiconsIcon
-                              icon={ArrowUpRight01Icon}
-                              size={16}
-                              strokeWidth={1.8}
-                            />
-                          </span>
-                        </a>
-                      </div>
+                     
                     </div>
                   </div>
 

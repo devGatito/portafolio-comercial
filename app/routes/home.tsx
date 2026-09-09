@@ -18,7 +18,7 @@ export default function Home() {
          <Process />
         <Problems />
         <Services />
-        <BusinessCases />
+       {/*  <BusinessCases /> */}
        
         <About />
         <Contact />

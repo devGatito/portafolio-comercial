@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -8,8 +8,6 @@ import {
   Clock01Icon,
   Alert02Icon,
   Settings02Icon,
-  ArrowLeft02Icon,
-  ArrowRight02Icon,
 } from "@hugeicons/core-free-icons";
 
 import { AnimatePresence, motion } from "motion/react";
@@ -52,16 +50,36 @@ export function Problems() {
     setActiveIndex(index);
   };
 
+  /*
+   * ======================================
+   * AUTOPLAY
+   * Cambia de slide cada 3 segundos
+   * ======================================
+   */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDirection(1);
+
+      setActiveIndex((currentIndex) => {
+        return (currentIndex + 1) % problems.length;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const activeProblem = problems[activeIndex];
   const activeIcon = problemIcons[activeIndex];
 
   return (
     <section
       id="problemas"
-      className="overflow-hidden  bg-white scroll-reveal-left"
+      className="overflow-hidden bg-white scroll-reveal-left"
     >
       <Container>
-        {/* Heading */}
+        {/* ======================================
+            HEADING
+        ====================================== */}
         <motion.div
           initial={{
             opacity: 0,
@@ -80,8 +98,6 @@ export function Problems() {
           }}
           className="mx-auto text-center"
         >
-          
-
           <h2 className="text-4xl font-semibold tracking-[-0.04em] text-zinc-950 sm:text-5xl">
             ¿Esto está frenando tu negocio?
           </h2>
@@ -93,7 +109,9 @@ export function Problems() {
           </p>
         </motion.div>
 
-        {/* Carousel */}
+        {/* ======================================
+            CAROUSEL
+        ====================================== */}
         <motion.div
           initial={{
             opacity: 0,
@@ -114,7 +132,6 @@ export function Problems() {
           className="relative mx-auto mt-12 max-w-[1180px] sm:mt-14 lg:mt-16"
         >
           <div className="relative flex min-h-[430px] items-center justify-center sm:min-h-[470px] lg:min-h-[500px]">
-            
             {/* ======================================
                 LEFT PREVIEW
             ====================================== */}
@@ -293,8 +310,6 @@ export function Problems() {
 
                       {/* Inner border */}
                       <div className="pointer-events-none absolute inset-[1px] rounded-[31px] border border-white/10 md:rounded-[39px]" />
-
-                     
                     </div>
 
                     {/* =================================
@@ -390,44 +405,12 @@ export function Problems() {
                 </motion.article>
               </AnimatePresence>
             </div>
-
-            {/* ======================================
-                LEFT ARROW
-            ====================================== */}
-            <button
-              type="button"
-              onClick={previous}
-              aria-label="Problema anterior"
-              className="absolute left-2 top-1/2 z-30 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-zinc-950 text-white shadow-[0_5px_15px_rgba(0,0,0,0.22)] transition duration-300 hover:scale-105 hover:bg-zinc-800 sm:left-5 lg:left-[3.5%]"
-            >
-              <HugeiconsIcon
-                icon={ArrowLeft02Icon}
-                size={17}
-                strokeWidth={2}
-              />
-            </button>
-
-            {/* ======================================
-                RIGHT ARROW
-            ====================================== */}
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Siguiente problema"
-              className="absolute right-2 top-1/2 z-30 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-zinc-950 text-white shadow-[0_5px_15px_rgba(0,0,0,0.22)] transition duration-300 hover:scale-105 hover:bg-zinc-800 sm:right-5 lg:right-[3.5%]"
-            >
-              <HugeiconsIcon
-                icon={ArrowRight02Icon}
-                size={17}
-                strokeWidth={2}
-              />
-            </button>
           </div>
 
-          
-
-          {/* CTA */}
-          <div className="flex justify-center ">
+          {/* ======================================
+              CTA
+          ====================================== */}
+          <div className="flex justify-center">
             <a
               href="#contacto"
               className="inline-flex h-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-950 px-5 text-xs font-medium text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-md"
@@ -436,8 +419,6 @@ export function Problems() {
             </a>
           </div>
         </motion.div>
-
-      
       </Container>
     </section>
   );

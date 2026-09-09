@@ -1,14 +1,10 @@
 export const contact = {
-  name: "Elías Soto",
+  name: "Cierra",
 
-  whatsapp: "[PENDIENTE: NUMERO DE WHATSAPP]",
+  whatsapp: "527621240911",
 
-  email: "[PENDIENTE: CORREO ELECTRONICO]",
-
-  linkedin: "[PENDIENTE: URL DE LINKEDIN]",
-
-  github: "[PENDIENTE: URL DE GITHUB]",
+  email: "hola@somoscierra.com",
 
   whatsappMessage:
-    "Hola Elías, vi tu sitio y quisiera hablar sobre un proyecto para mi negocio.",
+    "Hola Cierra, vi su sitio y quisiera hablar sobre un proyecto para mi negocio.",
 };

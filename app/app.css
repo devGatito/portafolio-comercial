@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 html {
@@ -41,8 +42,8 @@ button {
 @keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(50px);
-    filter: blur(6px);
+    transform: translateY(25px);
+    filter: blur(3px);
   }
 
   to {
@@ -55,8 +56,8 @@ button {
 @keyframes reveal-left {
   from {
     opacity: 0;
-    transform: translateX(-60px);
-    filter: blur(6px);
+    transform: translateX(-30px);
+    filter: blur(3px);
   }
 
   to {
@@ -69,8 +70,8 @@ button {
 @keyframes reveal-right {
   from {
     opacity: 0;
-    transform: translateX(60px);
-    filter: blur(6px);
+    transform: translateX(30px);
+    filter: blur(3px);
   }
 
   to {
@@ -83,8 +84,8 @@ button {
 @keyframes reveal-scale {
   from {
     opacity: 0;
-    transform: scale(0.92);
-    filter: blur(6px);
+    transform: scale(0.96);
+    filter: blur(3px);
   }
 
   to {
@@ -95,36 +96,39 @@ button {
 }
 
 /* Animación principal */
+
 .scroll-reveal {
   animation: reveal-up linear both;
   animation-timeline: view();
-  animation-range: entry 10% cover 35%;
+  animation-range: entry 0% cover 18%;
 }
 
 /* Variantes */
+
 .scroll-reveal-left {
   animation: reveal-left linear both;
   animation-timeline: view();
-  animation-range: entry 10% cover 35%;
+  animation-range: entry 0% cover 18%;
 }
 
 .scroll-reveal-right {
   animation: reveal-right linear both;
   animation-timeline: view();
-  animation-range: entry 10% cover 35%;
+  animation-range: entry 0% cover 18%;
 }
 
 .scroll-reveal-scale {
   animation: reveal-scale linear both;
   animation-timeline: view();
-  animation-range: entry 10% cover 35%;
+  animation-range: entry 0% cover 18%;
 }
 
-/* Para animaciones un poco más suaves/lentas */
+/* Variante ligeramente más suave */
+
 .scroll-reveal-soft {
   animation: reveal-up linear both;
   animation-timeline: view();
-  animation-range: entry 0% cover 45%;
+  animation-range: entry 0% cover 25%;
 }
 
 /* =========================
