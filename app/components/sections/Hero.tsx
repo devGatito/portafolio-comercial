@@ -73,17 +73,7 @@ export default function Hero() {
         </h1>
       </div>
 
-      {/* Bottom label */}
-      <p
-        className="
-          text-center text-[10px]
-          font-medium uppercase
-          tracking-[0.25em]
-          text-neutral-500
-        "
-      >
-        Estudio independiente de desarrollo web
-      </p>
+     
     </section>
   );
 }
