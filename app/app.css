@@ -26,3 +26,23 @@ body {
   background: #171717;
   color: #ffffff;
 }
+@keyframes scroll-arrow {
+  0%,
+  100% {
+    translate: 0 -3px;
+  }
+
+  50% {
+    translate: 0 3px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

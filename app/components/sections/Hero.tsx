@@ -1,12 +1,8 @@
 
-import { motion, useReducedMotion } from "motion/react";
-
 import AnimatedWord from "~/components/ui/AnimatedWord";
 import { heroWords } from "~/data/hero";
-
+import ScrollIndicator from "~/components/ui/ScrollIndicator";
 export default function Hero() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section
       id="hero"
@@ -14,66 +10,80 @@ export default function Hero() {
         relative flex min-h-svh w-full
         flex-col items-center
         overflow-hidden bg-white
-        px-5 py-10 text-[#171717]
-        md:px-12 md:py-14
+        px-4 py-8 text-[#171717]
+        sm:px-8 sm:py-10
+        lg:px-12 lg:py-14
       "
     >
       {/* Brand */}
-      <motion.div
-        initial={reduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: reduceMotion ? 0 : 0.6 }}
+      <div
         className="
           select-none rounded-full
-          border-[3px] border-black
-          px-6 py-2
-          text-[32px] font-bold
+          border-[2px] border-black
+          px-5 py-2
+          text-[28px] font-bold
           leading-none tracking-[-0.065em]
-          md:text-[44px]
+          sm:text-[34px]
+          lg:border-[3px] lg:text-[44px]
         "
       >
         somoscierra.
-      </motion.div>
+      </div>
 
       {/* Content */}
       <div
         className="
           flex w-full flex-1 flex-col
           items-center justify-center
-          py-20 text-center
+          text-center
+          
         "
       >
-        <h1
-          className="
-            max-w-[1400px]
-            text-[clamp(1.65rem,4.5vw,4.75rem)]
-            font-medium leading-[1.6]
-            tracking-[-0.055em]
-          "
-        >
-          Creamos{" "}
-          <AnimatedWord items={heroWords.creation} />,
+    <h1
+  className="
+    flex w-full max-w-[1400px]
+    flex-col items-center
+    gap-3 text-center font-medium
+    text-[clamp(1rem,5.4vw,2.8rem)]
+    leading-[1.5] tracking-[-0.055em]
+    md:gap-2
+    md:text-[clamp(1rem,4.5vw,4.75rem)]
+    md:leading-[1.6]
+  "
+>
+  {/* Creation */}
+  <span className="block whitespace-nowrap">
+    Creamos{" "}
+    <AnimatedWord
+      items={heroWords.creation}
+      offset={1800}
+    />
+    ,
+  </span>
 
-          <br className="hidden md:block" />
+  {/* Development */}
+  <span className="block whitespace-nowrap">
+    desarrollamos{" "}
+    <AnimatedWord
+      items={heroWords.development}
+      offset={3200}
+    />
+  </span>
 
-          {" "}desarrollamos{" "}
-          <AnimatedWord
-            items={heroWords.development}
-            offset={1800}
-          />
-
-          <br className="hidden md:block" />
-
-          {" "}y conectamos{" "}
-          <AnimatedWord
-            items={heroWords.connection}
-            offset={3600}
-          />
-          .
-        </h1>
+  {/* Connection */}
+  <span className="block whitespace-nowrap">
+    y conectamos{" "}
+    <AnimatedWord
+      items={heroWords.connection}
+      offset={4800}
+    />
+    .
+  </span>
+</h1>
       </div>
 
-     
+      {/* Bottom label */}
+     <ScrollIndicator target="#servicios" />
     </section>
   );
 }

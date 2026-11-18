@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
 
@@ -13,24 +12,19 @@ export function useRotatingWord(
   useEffect(() => {
     if (reduceMotion || length <= 1) return;
 
-    let timer: ReturnType<typeof setInterval> | undefined;
+    let timer: ReturnType<typeof setTimeout>;
 
-    const next = () => {
-      setIndex((prev) => (prev + 1) % length);
-    };
-
-    const timeout = setTimeout(() => {
-      next();
-      timer = setInterval(next, interval);
-    }, interval + offset);
-
-    return () => {
-      clearTimeout(timeout);
-
-      if (timer !== undefined) {
-        clearInterval(timer);
+    const tick = () => {
+      if (!document.hidden) {
+        setIndex((prev) => (prev + 1) % length);
       }
+
+      timer = setTimeout(tick, interval);
     };
+
+    timer = setTimeout(tick, 1800 + offset);
+
+    return () => clearTimeout(timer);
   }, [length, interval, offset, reduceMotion]);
 
   return {
