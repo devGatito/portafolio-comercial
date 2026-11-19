@@ -1,15 +1,36 @@
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { useState, useRef, useEffect } from "react";
 import {
-  Add01Icon,
-  ArrowUpRight01Icon,
-} from "@hugeicons/core-free-icons";
-import DigitalCollage from "./DigitalCollage";
+  motion,
+  AnimatePresence,
+  useInView,
+  useReducedMotion,
+} from "motion/react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Add01Icon } from "@hugeicons/core-free-icons";
 
 export default function Manifesto() {
   const [expanded, setExpanded] = useState(false);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const isInView = useInView(videoRef, {
+    amount: 0.2,
+  });
+
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    if (isInView && !reducedMotion) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isInView, reducedMotion]);
 
   return (
     <section
@@ -20,8 +41,6 @@ export default function Manifesto() {
     >
       <div className="mx-auto max-w-[1440px]">
 
-        {/* Section label */}
-       
         {/* Manifesto */}
         <motion.h2
           initial={{ opacity: 0, y: 35 }}
@@ -44,8 +63,8 @@ export default function Manifesto() {
         {/* Content grid */}
         <div
           className="mt-16 grid grid-cols-1 items-center
-                     gap-12 md:mt-24 md:grid-cols-2
-                     lg:gap-24"
+                     gap-10 md:mt-24 md:grid-cols-2
+                     lg:gap-16"
         >
           {/* Left column */}
           <motion.div
@@ -139,10 +158,40 @@ export default function Manifesto() {
             </button>
           </motion.div>
 
-          {/* Right column */}
-         <div className="relative min-w-0">
-  <DigitalCollage />
-</div>
+          {/* Right column — video */}
+          <motion.figure
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="relative flex w-full min-w-0
+                       flex-col items-center justify-center"
+          >
+            <div
+              className="relative aspect-square w-full
+                         overflow-hidden bg-white"
+            >
+              <video
+                ref={videoRef}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                disablePictureInPicture
+                disableRemotePlayback
+                className="pointer-events-none h-full
+                           w-full select-none object-contain"
+              >
+                <source
+                  src="/cursor.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+
+            
+          </motion.figure>
         </div>
       </div>
     </section>
