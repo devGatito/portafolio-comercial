@@ -5,7 +5,7 @@ import type { HugeiconsIcon } from "@hugeicons/react";
 export interface WordItem {
   text: string;
   icon: ComponentProps<typeof HugeiconsIcon>["icon"];
-  color: string;
+  color?: string| "#000000";
 }
 
 export interface AnimatedWordProps {
